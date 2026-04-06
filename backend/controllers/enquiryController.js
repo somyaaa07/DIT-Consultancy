@@ -1,35 +1,41 @@
 const { Enquiry } = require('../models');
 const { sendEnquiryNotification, sendEnquiryConfirmation } = require('../config/email');
 
-// ✅ Enquiry submit karo
 exports.createEnquiry = async (req, res) => {
   try {
     const { name, email, phone, company, type, message } = req.body;
 
     if (!name || !email || !type || !message) {
-      return res.status(400).json({ message: 'Name, email, type and message are required' });
+      return res.status(400).json({ 
+        message: 'Name, email, type and message are required' 
+      });
     }
 
-    // Database mein save karo
-    const enquiry = await Enquiry.create({ name, email, phone, company, type, message });
+    // ✅ Pehle database mein save karo
+    const enquiry = await Enquiry.create({ 
+      name, email, phone, company, type, message 
+    });
 
-    // Dono mails bhejo simultaneously
-    await Promise.all([
-      sendEnquiryNotification(enquiry), // Admin ko
-      sendEnquiryConfirmation(enquiry)  // User ko
-    ]);
-
+    // ✅ Turant response bhejo — mail ka wait mat karo
     res.status(201).json({
       message: 'Your message has been received! We will get back to you within 1 business day.',
       enquiry
     });
+
+    // ✅ Mail baad mein background mein bhejo
+    // Response ke baad — user ko wait nahi karna padega
+    sendEnquiryNotification(enquiry).catch(err => 
+      console.error('Admin mail error:', err.message)
+    );
+    sendEnquiryConfirmation(enquiry).catch(err => 
+      console.error('User mail error:', err.message)
+    );
+
   } catch (err) {
-    console.error('Email error:', err.message);
     res.status(500).json({ message: err.message });
   }
 };
 
-// ✅ Saari enquiries
 exports.getAllEnquiries = async (req, res) => {
   try {
     const enquiries = await Enquiry.findAll({
@@ -41,7 +47,6 @@ exports.getAllEnquiries = async (req, res) => {
   }
 };
 
-// ✅ Status update
 exports.updateEnquiryStatus = async (req, res) => {
   try {
     const enquiry = await Enquiry.findByPk(req.params.id);
