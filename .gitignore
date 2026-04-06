@@ -5,9 +5,7 @@
 # node modules
 node_modules/
 
-# build files
-dist/
-build/
+
 
 # logs
 npm-debug.log*
