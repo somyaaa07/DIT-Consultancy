@@ -7,7 +7,13 @@ require('./models/index');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://dit-consultancy-1ylc.vercel.app' 
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
@@ -19,7 +25,7 @@ app.use('/api/blogs',        require('./routes/blogs'));
 app.use('/api/enquiries',    require('./routes/enquiries')); // ← YE ADD KARO
 
 app.get('/', (req, res) => {
-  res.json({ message: '🚀 Job Portal API chal raha hai!' });
+  res.json({ message: '🚀 Job portal api is running' });
 });
 
 const PORT = process.env.PORT || 5000;
