@@ -20,7 +20,7 @@ const Navbar = () => {
     { label: 'About',    to: '/about'   },
     { label: 'Blog',     to: '/blogs'   },
     { label: 'Contact',  to: '/contact' },
-    { label: 'Register', to: '/register'},
+
   ];
 
   return (
@@ -208,6 +208,10 @@ const Navbar = () => {
           .nb-hamburger { display: flex !important; }
           .nb-drawer.open { display: flex; }
           .nb-inner { padding: 0 10px; }
+
+          .nb-drawer .nb-register {
+    display: inline-flex !important;
+  }
         }
           @media (max-width: 820px) {
   .nb-logo-img {

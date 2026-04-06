@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    'http://localhost:5173',
+  
     'https://dit-consultancy-1ylc.vercel.app' 
   ],
   credentials: true

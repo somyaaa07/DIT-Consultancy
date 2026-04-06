@@ -462,7 +462,9 @@ export default function DITHomePage() {
                 SERVICES BUILT<br /><span className="g-blue">FOR EXCELLENCE</span>
               </h2>
             </div>
-            {!isMobile && <button className="btn-g" style={{ padding: "11px 24px" }}>View All Services →</button>}
+            <Link to="/contact">
+            {!isMobile && <button className="btn-g" style={{ padding: "11px 24px" }}>View All Services →</button>}          </Link>
+
           </div>
           <div className="svc-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
             {SERVICES.map(s => (
@@ -490,7 +492,8 @@ export default function DITHomePage() {
                 FEATURED <span className="g-blue">OPENINGS</span>
               </h2>
             </div>
-            {!isMobile && <button className="btn-g" style={{ padding: "11px 24px" }}>View All Jobs →</button>}
+            <Link to="/jobs">
+            {!isMobile && <button className="btn-g" style={{ padding: "11px 24px" }}>View All Jobs →</button>}</Link>
           </div>
           <div className="jobs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
             {JOBS.map(j => (
@@ -567,8 +570,10 @@ export default function DITHomePage() {
                 Our consultants bring domain expertise, market intelligence, and genuine care to every engagement.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <button className="btn-p">Our Story →</button>
-                <button className="btn-g">Meet the Team</button>
+               
+               <Link to="/about"><button className="btn-p">Our Story →</button></Link> 
+                
+                <Link to="/about"><button className="btn-g">Meet the Team</button></Link>
               </div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
@@ -612,7 +617,7 @@ export default function DITHomePage() {
                   </div>
                 ))}
               </div>
-              <button className="btn-p">View More Stories →</button>
+              <Link to="/contact"><button className="btn-p">Visit us →</button></Link>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {TESTIMONIALS.map((t, i) => (
@@ -654,12 +659,17 @@ export default function DITHomePage() {
             <p className="jb" style={{ color: "rgba(255,255,255,.5)", fontSize: ".8rem", lineHeight: 1.9, marginBottom: 40, maxWidth: 500 }}>
               Whether you're a candidate ready to grow or an employer looking for exceptional talent — DIT is your trusted partner every step of the way.
             </p>
-            <div className="cta-btns" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 36 }}>
+           
+           
+           <div className="cta-btns" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 36 }}>
+           <Link to="/jobs">
               <button className="btn-p" style={{ padding: "16px 36px", fontSize: ".85rem", boxShadow: "0 8px 32px rgba(15,155,231,.4)" }}>
                 Find Your Dream Job
                 <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </button>
-              <button className="btn-gw" style={{ padding: "16px 36px", fontSize: ".85rem" }}>Hire with DIT</button>
+              </Link>
+              <Link to="/contact">
+              <button className="btn-gw" style={{ padding: "16px 36px", fontSize: ".85rem" }}>Hire with DIT</button></Link>
             </div>
             <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
               {[{ text: "Free for Candidates" }, { text: "No Hidden Fees" }, { text: "Dedicated Consultant" }].map(i => (
