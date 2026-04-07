@@ -568,36 +568,11 @@ const EmployerDashboard = () => {
   useEffect(() => { fetchCompany(); fetchMyJobs(); fetchBlogs(); }, []);
   useEffect(() => { if (activeTab === 'blogs') fetchBlogs(); }, [activeTab]);
 
-  // ✅ FIX: Race condition theek kiya — state se nahi, directly trimmed values bhejo
   const handleCreateCompany = async (e) => {
     e.preventDefault();
-
-    const formData = {
-      name:        companyForm.name.trim(),
-      description: companyForm.description.trim(),
-      industry:    companyForm.industry.trim(),
-      email:       companyForm.email.trim(),
-      size:        companyForm.size,
-      city:        companyForm.city.trim(),
-      phone:       companyForm.phone.trim(),
-      website:     companyForm.website.trim(),
-    };
-
-    if (!formData.name || !formData.description || !formData.industry || !formData.email) {
-      notify('Sab required fields bharo!', 'error');
-      return;
-    }
-
-    try {
-      const res = await API.post('/companies', formData);
-      setCompany(res.data.company);
-      setShowCompanyForm(false);
-      notify('Company created successfully!');
-    } catch (err) {
-      notify(err.response?.data?.message || 'Failed to create company', 'error');
-    }
+    try { const res = await API.post('/companies', companyForm); setCompany(res.data.company); setShowCompanyForm(false); notify('Company created successfully!'); }
+    catch (err) { notify(err.response?.data?.message || 'Failed to create company', 'error'); }
   };
-
   const handleCreateJob = async (e) => {
     e.preventDefault();
     try {
